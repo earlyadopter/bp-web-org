@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 import { PageHeader } from "@/components/layout/page-header";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "What Editors Get",
@@ -9,7 +9,13 @@ export const metadata: Metadata = {
     "Benefits of contributing to BorderlessPress as an editorial contributor.",
 };
 
-export default function WhatEditorsGetPage() {
+export default async function WhatEditorsGetPage() {
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/admin/login");
+  }
+
   const benefits = [
     {
       title: "Published credit",
@@ -59,12 +65,6 @@ export default function WhatEditorsGetPage() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link href="/apply">
-            <Button size="lg">Apply to Contribute</Button>
-          </Link>
         </div>
       </div>
     </>

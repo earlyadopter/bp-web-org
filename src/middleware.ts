@@ -1,8 +1,6 @@
-import { auth } from "@/lib/auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export default auth((req) => {
-  const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
+export function middleware(req: NextRequest) {
   const isLoginPage = req.nextUrl.pathname === "/admin/login";
   const isCheckEmail = req.nextUrl.pathname === "/admin/check-email";
 
@@ -11,14 +9,18 @@ export default auth((req) => {
     return NextResponse.next();
   }
 
-  // Protect all other admin routes
-  if (isAdminRoute && !req.auth) {
+  // Check for session cookie (NextAuth v5 uses authjs.session-token)
+  const sessionToken =
+    req.cookies.get("authjs.session-token")?.value ||
+    req.cookies.get("__Secure-authjs.session-token")?.value;
+
+  if (!sessionToken) {
     const loginUrl = new URL("/admin/login", req.url);
     return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: ["/admin/:path*"],

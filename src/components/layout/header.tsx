@@ -8,7 +8,6 @@ const navLinks = [
   { href: "/guides", label: "Guides" },
   { href: "/qualifications", label: "Qualifications" },
   { href: "/how-it-works", label: "How It Works" },
-  { href: "/what-editors-get", label: "What Editors Get" },
   { href: "/apply", label: "Apply" },
 ];
 

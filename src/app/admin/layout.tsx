@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 export default async function AdminLayout({
@@ -10,8 +9,10 @@ export default async function AdminLayout({
 }) {
   const session = await auth();
 
+  // Unauthenticated users see bare children (login/check-email pages)
+  // The middleware handles the redirect for protected routes
   if (!session?.user) {
-    redirect("/admin/login");
+    return <>{children}</>;
   }
 
   return (

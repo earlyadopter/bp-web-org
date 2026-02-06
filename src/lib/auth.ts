@@ -12,6 +12,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
     adapter: DrizzleAdapter(db),
     providers: [
       EmailProvider({
+        server: { host: "stub", port: 587, auth: { user: "stub", pass: "stub" } },
+        from: "noreply@borderlesspress.org",
         sendVerificationRequest: async ({ identifier: email, url }) => {
           await sendMagicLink(email, url);
         },
