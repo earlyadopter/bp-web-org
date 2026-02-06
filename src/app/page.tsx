@@ -22,7 +22,7 @@ export default function HomePage() {
               <Button size="lg">Apply to Contribute</Button>
             </Link>
             <Link href="/guides">
-              <Button variant="secondary" size="lg" className="!text-white !border-gray-500 hover:!bg-white/10">
+              <Button variant="secondary" size="lg" className="border-white/40 bg-transparent text-white hover:bg-white/10">
                 View Guides in Progress
               </Button>
             </Link>
