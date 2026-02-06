@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "danger" | "ghost";
+  variant?: "primary" | "secondary" | "outline" | "danger" | "ghost";
   size?: "sm" | "md" | "lg";
 }
 
@@ -19,6 +19,8 @@ export function Button({
       "bg-brand-accent text-white hover:bg-brand-accent-hover focus:ring-brand-accent",
     secondary:
       "bg-white text-brand-charcoal border border-gray-300 hover:bg-gray-50 focus:ring-brand-accent",
+    outline:
+      "bg-transparent text-white border border-white/40 hover:bg-white/10 focus:ring-white",
     danger:
       "bg-brand-error text-white hover:bg-red-700 focus:ring-red-500",
     ghost:
